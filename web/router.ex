@@ -17,8 +17,9 @@ defmodule Sample.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", DashboardController, :homepage
-    # get "/", PageController, :index
-
+    resources "users", UserController
+    resources "dashboards", DashboardController
+    resources "pages", PageController
   end
 
   # Other scopes may use custom stacks.

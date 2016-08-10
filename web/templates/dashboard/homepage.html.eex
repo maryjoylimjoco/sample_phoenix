@@ -1,3 +1,1 @@
-
-f reasons I yolo everyday <%= 10 + 14 %>
-
+<%= link "User List", to: dashboard_path(@conn, :index) %>
