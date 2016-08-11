@@ -1,18 +1,12 @@
 defmodule Sample.UserController do
   use Sample.Web, :controller
+  plug :authenticate when action in [:index, :show, :new]
 
   alias Sample.User
 
   def index(conn, _params) do
     users = Repo.all(Sample.User)
     render conn, "index.html", users: users
-    # case authenticate(conn) do
-    #   %Plug.Conn{halted: true} = conn ->
-    #     conn
-    #   conn ->
-    #     users = Repo.all(Sample.User)
-    #     render conn, "index.html", users: users
-    # end
   end
 
   def show(conn, %{"id" => id}) do
@@ -37,14 +31,14 @@ defmodule Sample.UserController do
     end
   end
 
-  # defp authenticate(conn) do
-  #   if conn.assigns.current_user do
-  #     conn
-  #   else
-  #     conn
-  #     |> put_flash(:error, "you must be logged in to access that page")
-  #     |> redirect(to: dashboard_path(conn, :homepage)
-  #     |> halt()
-  #   end
-  # end
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "you must be logged in to access that page")
+      |> redirect(to: dashboard_path(conn, :homepage))
+      |> halt()
+    end
+  end
 end
