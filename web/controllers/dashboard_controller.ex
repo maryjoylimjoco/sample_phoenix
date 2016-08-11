@@ -4,9 +4,4 @@ defmodule Sample.DashboardController do
   def homepage(conn, _params) do
     render conn, "homepage.html"
   end
-
-  def index(conn, _params) do
-    users = Repo.all(Sample.User)
-    render conn, "index.html", users: users
-  end
 end

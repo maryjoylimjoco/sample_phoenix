@@ -1,1 +1,1 @@
-<%= link "User List", to: dashboard_path(@conn, :index) %>
+<%= link "User List", to: user_path(@conn, :index) %>

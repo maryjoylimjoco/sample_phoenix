@@ -1,3 +1,4 @@
+<%= link "Add New User", to: user_path(@conn, :new) %>
 <table class="table">
   <%= for user <- @users do %>
     <tr>
